@@ -1,0 +1,41 @@
+DROP TABLE tSoo;
+DROP SEQUENCE tSoo_seq;
+DROP TABLE tBoard;
+DROP SEQUENCE tBoard_seq;
+DROP TABLE tReply;
+DROP SEQUENCE tReply_seq;
+
+
+CREATE TABLE tSoo(
+    pNum    number  primary key
+    ,id     varchar2(30) unique
+    ,password   varchar2(50) not null
+    ,nickname   varchar2(30) not null
+    ,fList   varchar2(2000) default ''
+    ,cList  varchar2(2000) default ''
+);
+
+CREATE SEQUENCE tSoo_seq;
+
+CREATE TABLE tBoard(
+    bNum    number primary key
+    ,id     varchar2(30) not null
+    ,title  varchar2(100) not null
+    ,context    varchar2(2000)  default ''
+    ,inputDate  date default SYSDATE
+    ,hits   number default 0
+);
+
+CREATE SEQUENCE tBoard_seq;
+
+CREATE TABLE tReply(
+    rNum    number primary key
+    ,bNum    number
+    ,id     varchar2(30)    not null
+    ,context    varchar2(1000) not null
+    ,inputDate  date default SYSDATE
+    ,constraint tReply_fk	foreign key(bNum)
+	references tBoard(bNum) on delete cascade 
+);
+
+CREATE SEQUENCE tReply_seq;

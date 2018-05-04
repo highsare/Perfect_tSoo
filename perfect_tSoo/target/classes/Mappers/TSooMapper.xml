@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="sar.web.tSoo.interfaces.TSooMapper">
+
+<insert id="insertTSoo" parameterType="tSoo">
+INSERT INTO tSoo(
+	pNum
+	,id
+	,password
+	,nickname
+	,fList
+) VALUES (
+	tSoo_seq.nextval
+	,#{id}
+	,#{password}
+	,#{nickname}
+	,#{fList}
+)
+</insert>
+
+<select id="selectOneTSoo" parameterType="string" resultType="tSoo">
+SELECT
+	pNum
+	,id
+	,password
+	,nickname
+	,fList
+	,cList
+FROM
+	tSoo
+WHERE
+	id = #{id}
+</select>
+
+<delete id="deleteTSoo" parameterType="int">
+DELETE tSoo
+WHERE
+	id = #{id}
+</delete>
+
+<update id="updateTSoo" parameterType="tSoo">
+UPDATE tSoo
+SET
+	password = #{password}
+	,nickname = #{nickname}
+WHERE
+	id = #{id}	
+</update>
+
+<update id="updateFList" parameterType="tSoo">
+UPDATE tSoo
+SET
+	fList = #{fList}
+WHERE
+	id = #{id}	
+</update>
+
+<update id="updateCList" parameterType="tSoo">
+UPDATE tSoo
+SET
+	cList = #{cList}
+WHERE
+	id = #{id}	
+</update>
+
+</mapper>

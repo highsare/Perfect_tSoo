@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- DB접속정보 값을 가지고 있는 파일 설정 -->
+	
+	<!-- Java Class에 대한 alias 지정 -->
+	<typeAliases>
+		<typeAlias type="sar.web.tSoo.VO.TSoo" alias="tSoo"/>
+		<typeAlias type="sar.web.tSoo.VO.TBoard" alias="tBoard"/>
+		<typeAlias type="sar.web.tSoo.VO.TReply" alias="tReply"/>
+	</typeAliases>
+</configuration>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.mybatis.org/mybatis-3/ko/getting-started.html의 '매핑된 SQL구문 살펴보기'에서 긁어온다. -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="sar.web.tSoo.interfaces.BoardMapper">
+<insert id="insertBoard" parameterType="tBoard">
+INSERT INTO tBoard(
+	bNum
+	,id
+	,title
+	,context
+)VALUES(
+	tBoard_seq.nextval
+	,#{id}
+	,#{title}
+	,#{context}
+)
+</insert>
+
+<select id="selectAllBoard" resultType="tBoard">
+SELECT
+	bNum
+	,id
+	,title
+	,context
+	,TO_CHAR(inputDate,'YY/MM/DD') as inputDate
+	,hits
+FROM
+	tBoard
+ORDER BY
+	bNum desc
+</select>
+
+<select id="selectOneBoard" parameterType="int" resultType="tBoard">
+SELECT
+	bNum
+	,id
+	,title
+	,context
+	,TO_CHAR(inputDate,'YY/MM/DD') as inputDate
+	,hits
+FROM
+	tBoard
+WHERE
+	bNum = #{bNum}
+</select>
+
+<delete id="deleteOneBoard" parameterType="int">
+DELETE
+	tBoard
+WHERE
+	bNum = #{bNum}
+</delete>
+
+<update id="updateOneBoard" parameterType="tBoard">
+UPDATE
+	tBoard
+SET
+	title = #{title}
+	,context = #{context}
+	,inputDate = SYSDATE
+WHERE
+	bNum = #{bNum}	
+</update>
+
+<update id="addHits" parameterType="int">
+UPDATE
+	tBoard
+SET
+	hits = hits + 1
+WHERE
+	bNum = #{bNum}
+</update>
+
+<insert id="insertReply" parameterType="tReply">
+INSERT INTO tReply(
+	rNum
+	,bNum
+	,id
+	,context
+)VALUES(
+	tReply_seq.nextVal
+	,#{bNum}
+	,#{id}
+	,#{context}
+)
+</insert>
+
+<delete id="deleteReply" parameterType="int">
+DELETE tReply
+WHERE
+	rNum = #{rNum}
+</delete>
+
+<select id="selectAllReply" resultType="tReply">
+SELECT
+	rNum
+	,bNum
+	,id
+	,context
+	,TO_CHAR(inputDate,'YY/MM/DD') as inputDate
+FROM
+	tReply
+ORDER BY
+	rNum
+</select>
+
+<select id="numOfBoards" resultType="int">
+SELECT count(*)
+FROM
+	tBoard
+</select>
+	
+</mapper>
